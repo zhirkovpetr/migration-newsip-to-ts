@@ -16,7 +16,9 @@
     "rules": {
         "no-debugger": "off",
         "no-console": 0,
-        "class-methods-use-this": "off"
+        "class-methods-use-this": "off",
+        "prettier/prettier": ["error", {"singleQuote": false, "endOfLine": "auto"}],
+        "@typescript-eslint/no-explicit-any": "error"
     },
     "parser": "@babel/eslint-parser"
 }
