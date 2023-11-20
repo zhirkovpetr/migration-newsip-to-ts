@@ -14,6 +14,7 @@ class Loader {
         this.baseLink = baseLink;
         this.options = options;
     }
+
     getResp<T>(
       { endpoint, options = {} }: { endpoint: string; options?: object },
       callback: Callback<T> = () => {
@@ -22,6 +23,7 @@ class Loader {
     ): void {
         this.load("GET", endpoint, callback, options);
     }
+
     errorHandler(res: Response): Response {
         if (!res.ok) {
             if (res.status === ErrorStatusCode.Unauthorized || res.status === ErrorStatusCode.NotFound)
@@ -39,7 +41,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load<T>(method: string, endpoint: string, callback: Callback<T>, options = {}): void {
+    load<T>(method: string, endpoint: string, callback: Callback<T> , options = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
           .then(this.errorHandler)
           .then((res) => res.json())
