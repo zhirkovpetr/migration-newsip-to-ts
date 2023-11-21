@@ -10,46 +10,24 @@ header h1 {
     font-size: 40px;
     font-weight: 800;
 }
-
-.footer {
-    background-color: transparent;
-    box-sizing: border-box;
+footer {
+    height: 100px;
     display: flex;
-    justify-content: space-around;
-    margin: 10px auto;
-    width: 100%;
-    padding: 1em;
+    align-items: center;
+    justify-content: center;
+}
+footer .copyright {
+    font-size: 14px;
+    color: #333;
     text-align: center;
 }
-
-
-.footer_rs {
-    display: block;
-    height: 60px;
-    width: 166px;
-    background-image: url(./data/rs_school_js.svg);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
+footer .copyright a {
+    color: #444;
+}
+footer .copyright a:hover {
+    color: #555;
 }
 
-.footer_gh {
-    display: block;
-    min-width: 62px;
-    min-height: 24px;
-    background-image: url(./data/github.svg);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.reserved_footer {
-    align-items: center;
-    display: flex;
-    font-size: 24px;
-    line-height: 27px;
-    text-decoration: none;
-    margin-right: 50px;
-    color: #30c5ff;
-    font-family: Arial, serif;
+footer .copyright:before {
+    content: "©";
 }

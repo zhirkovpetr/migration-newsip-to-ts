@@ -1,36 +1,23 @@
 import "./sources.css";
-import { ISource } from "../../../interface/IArticles";
+import { ISource } from "../news/news";
 
 class Sources {
-    draw(data: Array<ISource>) {
-        const fragment = document.createDocumentFragment();
-        const sourceItemTemp = document.querySelector("#sourceItemTemp");
+    draw(data: ISource[]) {
+        const fragment = document.createDocumentFragment() as DocumentFragment;
+        const sourceItemTemp = document.querySelector("#sourceItemTemp") as HTMLTemplateElement;
+
         data.forEach((item: ISource) => {
-            const sourceClone = sourceItemTemp.content.cloneNode(true);
+            const sourceClone = sourceItemTemp.content.cloneNode(true) as HTMLElement;
             if (sourceClone) {
-                sourceClone.querySelector(".source__item-name").textContent = item.name;
-                sourceClone.querySelector(".source__item").setAttribute("data-source-id", item.id);
+                (sourceClone.querySelector(".source__item-name") as HTMLElement).textContent = item.name;
+                (sourceClone.querySelector(".source__item") as HTMLElement).setAttribute("data-source-id", item.id);
+
                 fragment.append(sourceClone);
             }
         });
-        document.querySelector(".sources").append(fragment);
+
+        (document.querySelector(".sources") as HTMLElement).append(fragment);
     }
 }
-
-const s = document.querySelector(".sources");
-let o: number;
-o = 0;
-document.querySelector(".slider-next").addEventListener("click", function () {
-    o += 256;
-    s.style.left = -o + "px";
-});
-
-document.querySelector(".slider-prev").addEventListener("click", function () {
-    o -= 256;
-    if (o < 0) {
-        o = 0;
-    }
-    s.style.left = -o + "px";
-});
 
 export default Sources;
