@@ -1,4 +1,9 @@
-import { IGeneric } from "../view/appView";
+type Callback<T> = (data: T) => void;
+
+enum ErrorStatusCode {
+    Unauthorized = 401,
+    NotFound,
+}
 
 class Loader {
     baseLink: string;
@@ -12,9 +17,9 @@ class Loader {
         this.options = options;
     }
 
-    getResp(
+    getResp<T>(
       { endpoint, options = {} }: { endpoint: string; options?: object },
-      callback: (data: IGeneric) => void = () => {
+      callback: Callback<T> = () => {
           console.error("No callback for GET response");
       }
     ): void {
@@ -23,7 +28,7 @@ class Loader {
 
     errorHandler(res: Response): Response {
         if (!res.ok) {
-            if (res.status === 401 || res.status === 404)
+            if (res.status === ErrorStatusCode.Unauthorized || res.status === ErrorStatusCode.NotFound)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
             throw Error(res.statusText);
         }
@@ -40,7 +45,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback: (data: IGeneric) => void, options = {}): void {
+    load<T>(method: string, endpoint: string, callback: Callback<T> , options = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
           .then(this.errorHandler)
           .then((res) => res.json())
