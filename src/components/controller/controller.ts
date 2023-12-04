@@ -1,8 +1,8 @@
 import AppLoader from "./appLoader";
-import { IGeneric } from "../view/appView";
+import { Callback } from "./loader";
 
 class AppController extends AppLoader {
-  getSources(callback: (data: IGeneric) => void) {
+  getSources<T>(callback: Callback<T>) {
     super.getResp(
       {
         endpoint: "sources",
@@ -10,7 +10,8 @@ class AppController extends AppLoader {
       callback
     );
   }
-  getNews(e: Event, callback: (data: IGeneric) => void) {
+
+  getNews<T>(e: Event, callback: Callback<T>) {
     let target = e.target as HTMLElement;
     const newsContainer = e.currentTarget as HTMLElement;
     while (target !== newsContainer) {
