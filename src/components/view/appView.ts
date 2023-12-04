@@ -1,26 +1,27 @@
-import News, { IArticles, ISource } from "./news/news";
+import News from "./news/news";
 import Sources from "./sources/sources";
+import { INews } from "../../interface/INews";
+import { IArticles, ISource } from "../../interface/IArticles";
 
-export interface IGeneric {
-    articles: Array<IArticles>;
+export interface IData {
     sources: Array<ISource>;
 }
 
 export class AppView {
     news: News;
-
     sources: Sources;
-
     constructor() {
         this.news = new News();
         this.sources = new Sources();
     }
-    drawNews(data: IGeneric): void {
-        const values: IArticles[] = data?.articles ? data?.articles : [];
+
+    drawNews(data: INews): void {
+        const values: Array<IArticles> = data?.articles ? data?.articles : [];
         this.news.draw(values);
     }
-    drawSources(data: IGeneric): void {
-        const values: ISource[] = data?.sources ? data?.sources : [];
+
+    drawSources(data: IData): void {
+        const values: Array<ISource> = data?.sources ? data?.sources : [];
         this.sources.draw(values);
     }
 }
